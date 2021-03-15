@@ -4,6 +4,9 @@ from django.utils.translation import gettext as _
 
 
 class SanityValidator:
+    """
+    Custom validation for password field.
+    """
 
     def validate(self, password, user=None):
         upper_reg = r'\w*[A-Z]\w*'

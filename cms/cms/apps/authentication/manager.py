@@ -3,6 +3,9 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class CustomUserManager(BaseUserManager):
+    """
+    User manager for custom user table.
+    """
 
     def create_user(self, email, first_name, last_name, password, **extra_fields):
         if not email:
