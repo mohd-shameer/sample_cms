@@ -10,6 +10,8 @@ Setting up dev environment needs components like
 
 If these are already present, then running `docker-compose up` will suffice
 
+Once the containers are up, create a superuser from app terminal. Use it for login and then create other users using this creds.
+
 #### Testing
 
 To run tests, coverage module is used: `coverage run manage.py test authentication article --settings=cms.settings --verbosity 2`
