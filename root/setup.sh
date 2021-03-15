@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function postgres_cmd {
+    PGPASSWORD="$POSTGRES_PASSWORD" psql -h $POSTGRES_HOST -p 5432 -U $POSTGRES_USER -tAc "$1"
+}
+
+postgres_cmd "CREATE DATABASE $POSTGRES_SDB"
+postgres_cmd "CREATE USER $POSTGRES_SUSER WITH PASSWORD '$POSTGRES_SPASSWORD'"
+postgres_cmd "ALTER ROLE $POSTGRES_SUSER SET client_encoding TO 'utf8'; ALTER ROLE $POSTGRES_SUSER SET default_transaction_isolation TO 'read committed'; ALTER ROLE $POSTGRES_SUSER SET timezone TO 'UTC';"
+postgres_cmd "GRANT ALL PRIVILEGES ON DATABASE $POSTGRES_SDB TO $POSTGRES_SUSER"
+postgres_cmd "ALTER USER $POSTGRES_SUSER CREATEDB;"

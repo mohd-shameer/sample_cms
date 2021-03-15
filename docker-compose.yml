@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    container_name: app
+    stdin_open: true
+    tty: true
+    ports:
+      - 8000:8000
+    restart: always
+    volumes:
+      - ./cms:/cms
+    networks:
+      - cms
+    env_file:
+      - root/database.env
+
+  postgres:
+    image: 'postgres'
+    container_name: postgres
+    env_file:
+      - root/database.env
+    volumes:
+      - data:/var/lib/postgresql/data/
+    networks:
+      - cms
+    ports:
+      - 5432:5432
+
+networks:
+  cms:
+
+volumes:
+  data:
